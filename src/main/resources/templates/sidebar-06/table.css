@@ -1,0 +1,133 @@
+/* Общие стили для таблицы */
+.table {
+	table-layout: fixed;
+	width: calc(100% - 6rem);
+	margin-top: 6rem;
+	margin-left: 5.5rem;
+    margin-bottom: 1rem;
+    color: black;
+    border-collapse: collapse;
+}
+
+.table th,
+.table td {
+	width: 12%;
+	text-align: center;
+    padding: 0.75rem;
+    vertical-align: center;
+    border-top: 1px solid #dee2e6;
+}
+
+.table thead th {
+    border-bottom: 2px solid #dee2e6;
+}
+
+.table tbody + tbody {
+    border-top: 2px solid #dee2e6;
+}
+
+/* Стили для конкретных классов */
+.table-bordered {
+    border: 1px solid #dee2e6;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+.table-hover tbody tr:hover {
+    color: #212529;
+    background-color: rgba(0, 0, 0, 0.075);
+}
+
+.table-condensed th,
+.table-condensed td {
+    padding: 0.3rem;
+}
+
+.text-center {
+    text-align: center;
+}
+
+/* Стили для кнопки */
+.btn {
+    display: inline-block;
+    font-weight: 400;
+    color: #212529;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+.btn-sm {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.875rem;
+    line-height: 1.5;
+    border-radius: 0.2rem;
+}
+
+.btn-solid {
+	border: none;
+	background: rgba(0, 0, 0, 0);
+}
+
+.input-sm {
+    width: 80%;
+    height: calc(1.5rem + 2px); /* Уменьшенная высота */
+    margin: 0;
+    padding: 0.25rem 0.5rem; /* Уменьшенные внутренние поля */
+    font-family: inherit;
+    font-size: 0.875rem; /* Уменьшенный размер шрифта */
+    font-weight: 400;
+    line-height: 1.5;
+    color: #212529;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #bdbdbd;
+    border-radius: 0.25rem;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.add-line-button {
+  margin-top: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.add-line-button button {
+  background-color: #48abe0;
+  color: white;
+  border: none;
+  padding: 5px;
+  font-size: 31px;
+  height: 65px;
+  width: 65px;
+  box-shadow: 0 2px 4px darkslategray;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.add-line-button button:active {
+  background-color: #48abe0;
+  box-shadow: 0 0 2px darkslategray;
+  transform: translateY(2px);
+}
+
+.add-line-button button:not(:first-child) {
+  margin-top: 10px;
+}
+
+.round-5 {
+  border-radius: 40%;
+}

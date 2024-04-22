@@ -1,0 +1,26 @@
+<div th:fragment="footer">
+	<script src="js/sidebar.js"></script>
+
+	<script>
+			function updateTable(status = 'actual') {
+				$.ajax({
+					url: '/api/getTableData',
+					type: 'GET',
+					data: { status: status },
+					success: function(data) {
+						var html = '';
+						data.forEach(function(item) {
+							html += '<tr><td>' + item.reservationNumber + '</td><td>' + item.status.name + '</td><td>' + item.user + '</td><td>' + item.reservationDateStart + '</td><td>' + item.reservationDateEnd + '</td><td>' + item.platform.name + '</td><td>' + item.pcNumber + '</td><td>' + item.comment + '</td></tr>';
+						});
+						$('#DynamicTable tbody').html(html);
+
+						$('#DynamicTable').SetEditable({
+							$addButton: $('#addNewRow')
+						});
+					}
+				});
+			}
+
+			updateTable();
+	</script>
+</div>
