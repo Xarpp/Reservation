@@ -1,8 +1,11 @@
 package com.youplay.reservation.models;
 
+import com.youplay.reservation.validation.ValidReservationDateRange;
 import jakarta.persistence.*;
-import java.util.Date;
 
+import java.time.LocalDateTime;
+
+@ValidReservationDateRange
 @Entity
 @Table(name = "Reservation")
 public class Reservation {
@@ -15,32 +18,45 @@ public class Reservation {
     @JoinColumn(name = "StatusID", referencedColumnName = "StatusID")
     private Status status;
 
-    private int reservationNumber;
+
+    private int reservationNumber = -1;
 
     private String user;
 
-    @Temporal(TemporalType.DATE)
-    private Date reservationDateStart;
 
-    @Temporal(TemporalType.DATE)
-    private Date reservationDateEnd;
+    @Column(name = "reservation_date_start")
+    private LocalDateTime reservationDateStart;
 
-    @Temporal(TemporalType.DATE)
-    private Date DateCreate;
+
+    @Column(name = "reservation_date_end")
+    private LocalDateTime reservationDateEnd;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    private LocalDateTime dateCreate = LocalDateTime.now();
 
     @ManyToOne
     @JoinColumn(name = "PlatformID", referencedColumnName = "PlatformID")
     private Platform platform;
 
-    private int userPlatformID;
+    private int userPlatformID = -1;
 
-    private int pcNumber;
+    @ManyToOne
+    @JoinColumn(name = "HostID", referencedColumnName = "HostID")
+    private Host host;
 
     private String comment;
 
-    private boolean isDeleted;
+    private boolean isDeleted = false;
 
     public Reservation() {
+    }
+
+    public Host getHost() {
+        return host;
+    }
+
+    public void setHost(Host host) {
+        this.host = host;
     }
 
     public long getReservationID() {
@@ -75,19 +91,19 @@ public class Reservation {
         this.user = user;
     }
 
-    public Date getReservationDateStart() {
-        return reservationDateStart;
+    public LocalDateTime getReservationDateStart() {
+        return this.reservationDateStart;
     }
 
-    public void setReservationDateStart(Date reservationDateStart) {
+    public void setReservationDateStart(LocalDateTime reservationDateStart) {
         this.reservationDateStart = reservationDateStart;
     }
 
-    public Date getReservationDateEnd() {
-        return reservationDateEnd;
+    public LocalDateTime getReservationDateEnd() {
+        return this.reservationDateEnd;
     }
 
-    public void setReservationDateEnd(Date reservationDateEnd) {
+    public void setReservationDateEnd(LocalDateTime reservationDateEnd) {
         this.reservationDateEnd = reservationDateEnd;
     }
 
@@ -107,14 +123,6 @@ public class Reservation {
         this.userPlatformID = userPlatformID;
     }
 
-    public int getPcNumber() {
-        return pcNumber;
-    }
-
-    public void setPcNumber(int pcNumber) {
-        this.pcNumber = pcNumber;
-    }
-
     public String getComment() {
         return comment;
     }
@@ -131,11 +139,14 @@ public class Reservation {
         isDeleted = deleted;
     }
 
-    public Date getDateCreate() {
-        return DateCreate;
+    public LocalDateTime getDateCreate() {
+        return dateCreate;
     }
 
-    public void setDateCreate(Date dateCreate) {
-        DateCreate = dateCreate;
+    public void setDateCreate(LocalDateTime dateCreate) {
+        this.dateCreate = dateCreate;
     }
+
+
+
 }

@@ -1,6 +1,8 @@
 <div th:fragment="footer">
 	<script src="js/sidebar.js"></script>
 
+	<div th:insert="blocks/notification :: notification"></div>
+
 	<script>
 			function updateTable(status = 'actual') {
 				$.ajax({
@@ -8,9 +10,10 @@
 					type: 'GET',
 					data: { status: status },
 					success: function(data) {
+						console.log(data);
 						var html = '';
 						data.forEach(function(item) {
-							html += '<tr><td>' + item.reservationNumber + '</td><td>' + item.status.name + '</td><td>' + item.user + '</td><td>' + item.reservationDateStart + '</td><td>' + item.reservationDateEnd + '</td><td>' + item.platform.name + '</td><td>' + item.pcNumber + '</td><td>' + item.comment + '</td></tr>';
+							html += '<tr><td>' + item.reservationID + '</td><td>' + item.status.name + '</td><td>' + item.user + '</td><td>' + item.reservationDateStart + '</td><td>' + item.reservationDateEnd + '</td><td>' + item.platform.name + '</td><td>' + item.host.name + '</td><td>' + item.comment + '</td></tr>';
 						});
 						$('#DynamicTable tbody').html(html);
 

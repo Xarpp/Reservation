@@ -1,3 +1,11 @@
+input::-webkit-input-placeholder, textarea::-webkit-input-placeholder {
+    color: #aaa;
+}
+
+#ms-list-1 > button > span {
+    color: #aaa;
+}
+
 /* Общие стили для таблицы */
 .table {
 	table-layout: fixed;
@@ -11,7 +19,6 @@
 
 .table th,
 .table td {
-	width: 12%;
 	text-align: center;
     padding: 0.75rem;
     vertical-align: center;
@@ -82,20 +89,18 @@
 }
 
 .input-sm {
-    width: 80%;
-    height: calc(1.5rem + 2px); /* Уменьшенная высота */
-    margin: 0;
-    padding: 0.25rem 0.5rem; /* Уменьшенные внутренние поля */
-    font-family: inherit;
-    font-size: 0.875rem; /* Уменьшенный размер шрифта */
-    font-weight: 400;
-    line-height: 1.5;
-    color: #212529;
+    position: relative;
+    height: calc(2rem + 2px); /* Уменьшенная высота */
+    width: 90%;
+    text-align: left;
+    border: 1px solid #aaa;
     background-color: #fff;
-    background-clip: padding-box;
-    border: 1px solid #bdbdbd;
-    border-radius: 0.25rem;
-    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    padding: 5px 5px 5px 5px;
+    margin-top: 1px;
+    font-size: 14px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .add-line-button {

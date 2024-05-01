@@ -178,10 +178,12 @@ body.collapsed h2 {
 }
 
 .sidebar-links li {
+  cursor: pointer;
   color: var(--text-link);
 }
 
 body.collapsed .sidebar-links li {
+  cursor: pointer;
   display: flex;
   justify-content: center;
   align-items: center;
