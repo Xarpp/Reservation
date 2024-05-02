@@ -1,5 +1,7 @@
 package com.youplay.reservation.controllers;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.youplay.reservation.models.Platform;
 import com.youplay.reservation.models.Reservation;
 import com.youplay.reservation.repositories.ReservationRepository;
@@ -8,6 +10,7 @@ import com.youplay.reservation.services.ReservationService;
 import com.youplay.reservation.side_api.GizmoApi;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,6 +22,7 @@ public class ApiController {
 
     private final ReservationService reservationService;
     private final PlatformService platformService;
+    private final ObjectMapper objectMapper = new ObjectMapper();
 
     @Autowired
     public ApiController(ReservationService reservationService, ReservationRepository reservationRepository, PlatformService platformService) {
@@ -53,14 +57,15 @@ public class ApiController {
         }
     }
     @PostMapping("/reservation")
-    public ResponseEntity<Reservation> createReservation(@RequestBody Reservation newReservation) {
+    public ResponseEntity<String> createReservation(@RequestBody Reservation newReservation) {
+        String successMessage = "Бронирование успешно создано / изменено";
+        String errorMessage = "Ошибка при созданиии/изменении бронирования";
         Reservation savedReservation = reservationService.updateOrCreateReservation(newReservation);
         if (savedReservation!= null) {
-            return ResponseEntity.status(201).body(savedReservation);
+            return ResponseEntity.ok(successMessage);
         } else {
-            return ResponseEntity.status(500).body(null);
+            return ResponseEntity.badRequest().body(errorMessage);
         }
-
     }
 
     @PostMapping("/platform")
