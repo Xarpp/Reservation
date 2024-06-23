@@ -1,4 +1,6 @@
 package com.youplay.reservation.models;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 
 @Entity
@@ -6,10 +8,11 @@ import jakarta.persistence.*;
 public class Host {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonProperty("id")
     private long hostID;
 
     private String name;
+    private int number;
 
     public Host() {
     }
@@ -28,6 +31,14 @@ public class Host {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public int getNumber() {
+        return number;
+    }
+
+    public void setNumber(int number) {
+        this.number = number;
     }
 }
 

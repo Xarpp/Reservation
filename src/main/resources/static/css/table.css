@@ -136,3 +136,7 @@ input::-webkit-input-placeholder, textarea::-webkit-input-placeholder {
 .round-5 {
   border-radius: 40%;
 }
+
+.pull-right {
+  text-align: end !important;
+}

@@ -20,4 +20,7 @@ public interface ReservationRepository extends CrudRepository<Reservation, Long>
     @Query("update Reservation e set e.status.id = 4 where e.id = ?1")
     Integer setIsDeletedStatusByID(Long id);
 
+    @Query("SELECT r.reservationNumber FROM Reservation r WHERE r.reservationID = :id")
+    Long findReservationNumberByReservationID(Long id);
+
 }

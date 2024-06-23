@@ -2,8 +2,10 @@ package com.youplay.reservation.models;
 
 import com.youplay.reservation.validation.ValidReservationDateRange;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 
 import java.time.LocalDateTime;
+import java.util.Set;
 
 @ValidReservationDateRange
 @Entity
@@ -18,8 +20,9 @@ public class Reservation {
     @JoinColumn(name = "StatusID", referencedColumnName = "StatusID")
     private Status status;
 
-
-    private int reservationNumber = -1;
+    @Column(name = "reservation_number", nullable = false)
+    @NotNull
+    private long reservationNumber;
 
     private String user;
 
@@ -40,9 +43,13 @@ public class Reservation {
 
     private int userPlatformID = -1;
 
-    @ManyToOne
-    @JoinColumn(name = "HostID", referencedColumnName = "HostID")
-    private Host host;
+    @ManyToMany()
+    @JoinTable(
+        name = "reservation_host",
+        joinColumns = @JoinColumn(name = "reservationID"),
+        inverseJoinColumns = @JoinColumn(name = "hostID")
+    )
+    private Set<Host> hosts;
 
     private String comment;
 
@@ -51,12 +58,12 @@ public class Reservation {
     public Reservation() {
     }
 
-    public Host getHost() {
-        return host;
+    public Set<Host> getHosts() {
+        return hosts;
     }
 
-    public void setHost(Host host) {
-        this.host = host;
+    public void setHosts(Set<Host> hosts) {
+        this.hosts = hosts;
     }
 
     public long getReservationID() {
@@ -75,11 +82,11 @@ public class Reservation {
         this.status = status;
     }
 
-    public int getReservationNumber() {
+    public long getReservationNumber() {
         return reservationNumber;
     }
 
-    public void setReservationNumber(int reservationNumber) {
+    public void setReservationNumber(long reservationNumber) {
         this.reservationNumber = reservationNumber;
     }
 
